@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
+import './style.css';
 
 function App() {
 
   const [data, setData] = useState();
-  const [newComment, setNewComment] = useState({name: '', text: ''})
-  const [changeComment, setChangeComment] = useState({name: '', text: ''})
+  const [newComment, setNewComment] = useState({name: '', text: '', img: ''})
+  const [changeComment, setChangeComment] = useState({name: '', text: '', img: ''})
   const [changeId, setChangeId] = useState(null);
 
   const getApi = () => {
@@ -40,14 +41,14 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <div className='container'>
       <h1>Коментарии</h1>
       {
         data && 
         data.map((comments) => (
           <div key={comments.id}>
             {changeId === comments.id ? (
-              <div>
+              <div className='inputs'>
                 <input 
                   type="text" 
                   value={changeComment.name} 
@@ -59,6 +60,11 @@ function App() {
                   value={changeComment.text} 
                   onChange={(e) => setChangeComment({...changeComment, text: e.target.value})} 
                 />
+                <input 
+                  type="text" 
+                  value={changeComment.img} 
+                  onChange={(e) => setChangeComment({...changeComment, img: e.target.value})} 
+                />
                 <button onClick={() => {
                   patchApi(comments.id, changeComment)
                   setChangeId(null)
@@ -66,16 +72,22 @@ function App() {
                 <button onClick={() => setChangeId(null)}>Cancel</button>
               </div>
             ) : (
-              <div>
-                <h2>{comments.name}</h2>
-                <p>{comments.text}</p>
+              <div className='container-comment'>
+                <div className='item'>
+                  <div>
+                    <h2>{comments.name}</h2>
+                    <p>{comments.text}</p>
+                  </div>
+                  <img width={300} src={comments.img} alt="" />
+                </div>
 
-                <button onClick={() => {
-                  setChangeId(comments.id)
-                  setChangeComment({name: comments.name, text: comments.text})
-                  }}>Change text</button>
-
-                <button onClick={() => deleteApi(comments.id)}>Delete</button>
+                <div>
+                  <button onClick={() => {
+                    setChangeId(comments.id)
+                    setChangeComment({name: comments.name, text: comments.text, img: comments.img})
+                    }}>Change text</button>
+                  <button onClick={() => deleteApi(comments.id)}>Delete</button>
+                </div>
               </div>
             )}
           </div>
@@ -91,6 +103,12 @@ function App() {
         type="text" 
         value={newComment.text} 
         onChange={(e) => setNewComment({...newComment, text: e.target.value})} 
+      />
+
+      <input 
+        type="text" 
+        value={newComment.img} 
+        onChange={(e) => setNewComment({...newComment, img: e.target.value})} 
       />
       <button onClick={() => {postApi(newComment)}}>Send comment</button>
     </div>

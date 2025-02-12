@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container h1{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.container-comment{
+    text-align: center;
+}
+
+.container-comment .item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgb(187, 187, 187);
+    border-radius: 30px;
+    gap: 50px;
+}
+
+.item img{
+    border-radius: 20px;
+}
+
+button{
+    background-color: rgb(226, 226, 226);
+    padding: 10px 20px;
+    border: none;
+    margin: 20px;
+}
+
+.inputs{
+    text-align: center;
+}
+
+.inputs input{
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #000000;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+}
